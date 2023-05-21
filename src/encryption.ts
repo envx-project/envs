@@ -28,7 +28,7 @@ const decryptString = ({
   salt: string;
   iv: string;
 }) => {
-  const key = pbkdf2Sync(password, Buffer.from(salt), 100000, 32, 'sha512');
+  const key = pbkdf2Sync(password, Buffer.from(salt, 'base64'), 100000, 32, 'sha512');
   const decipher = createDecipheriv('aes-256-cbc', key, Buffer.from(iv, 'base64'));
 
   let decrypted = decipher.update(data, 'base64', 'utf8');
@@ -61,3 +61,4 @@ export const decryptEnv = (encryptedEnv: Omit<EncryptedEnv, 'id' | 'userId' | 'n
   ...encryptedEnv,
   password,
 });
+
