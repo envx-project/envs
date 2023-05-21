@@ -46,3 +46,5 @@ jobs:
           node-version: 18.x
       - run: npm ci
       - run: npm run build
+        env:
+          SKIP_ENV_VALIDATION: true

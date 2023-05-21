@@ -13,4 +13,9 @@ export const env = createEnv({
     clientPrefix: '',
     client: {},
     runtimeEnv: process.env,
+    // skip validation when SKIP_ENV_VALIDATION is set to true
+    skipValidation:
+        !!process.env.SKIP_ENV_VALIDATION &&
+        process.env.SKIP_ENV_VALIDATION !== 'false' &&
+        process.env.SKIP_ENV_VALIDATION !== '0',
 });
