@@ -18,7 +18,6 @@ export class UserController {
                 })
                 .execute();
         } catch (error) {
-            console.log(db.insertInto);
             throw new Error('User ID already taken');
         }
 

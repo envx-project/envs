@@ -26,9 +26,10 @@ const jestConfig: JestConfigWithTsJest = {
     compilerOptions.paths /*, { prefix: '<rootDir>/' } */
   ),
   transform: {
-    "^.+\\.(ts|tsx)$": "ts-jest",
+    '^.+\\.(ts|tsx)?$': ['ts-jest', { useESM: true }],
   },
   collectCoverageFrom: ["src/**/*.ts"],
+  coverageReporters: ['clover', 'json', 'json-summary', 'lcov', ['text', { skipFull: true }]],
 };
 
 export default jestConfig;
