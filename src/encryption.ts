@@ -12,7 +12,7 @@ const encryptString = (plainText: string, password: string) => {
 
   return {
     iv: iv.toString('base64'),
-    salt: key.toString('base64'),
+    salt: salt.toString('base64'),
     data: encrypted,
   };
 }
@@ -28,7 +28,7 @@ const decryptString = ({
   salt: string;
   iv: string;
 }) => {
-  const key = pbkdf2Sync(password, salt, 100000, 32, 'sha512');
+  const key = pbkdf2Sync(password, Buffer.from(salt), 100000, 32, 'sha512');
   const decipher = createDecipheriv('aes-256-cbc', key, Buffer.from(iv, 'base64'));
 
   let decrypted = decipher.update(data, 'base64', 'utf8');

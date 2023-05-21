@@ -19,8 +19,7 @@ export class EnvController {
             value,
         });
 
-        if (!encryptedEnv)
-            throw new Error('Failed to encrypt');
+        if (!encryptedEnv) throw new Error('Failed to encrypt');
 
         // Save the encrypted env
         await db
@@ -28,8 +27,6 @@ export class EnvController {
             .values(encryptedEnv)
             .onDuplicateKeyUpdate(encryptedEnv)
             .execute();
-
-        return;
     }
 
     @Send()
@@ -71,8 +68,7 @@ export class EnvController {
             .where('name', '=', name)
             .executeTakeFirst();
 
-        if (!encryptedEnv)
-            throw new Error('Not found');
+        if (!encryptedEnv) throw new Error('Not found');
 
         return {
             name,
@@ -91,7 +87,5 @@ export class EnvController {
             .where('userId', '=', userId)
             .where('name', '=', name)
             .execute();
-
-        return;
     }
 }
